@@ -1,3 +1,3 @@
-secretkey = 'agajenvl#%8'
+secretkey = '########'
 admin_name = 'viktor'
-admin_password = 'roTkiv#1371'
+admin_password = '#######'
