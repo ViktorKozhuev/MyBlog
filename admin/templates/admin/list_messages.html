@@ -1,0 +1,20 @@
+{% extends 'admin/base_admin.html' %}
+
+{% block content %}
+{{ super() }}
+<h3>{{title}}</h3>
+<ul class="list-posts">
+{% for p in list %}
+<li>
+    <div class="title">{{p.name}}
+    <span><a href="mailto:{{p.email}}">{{p.email}}</a></span>
+    <span style="float: right">
+            <i>{{time_to_date(p.time)}}</i>
+    </span>
+
+    </div>
+    <p class="annonce">{{p.text}}</p>
+</li>
+{% endfor %}
+</ul>
+{% endblock %}

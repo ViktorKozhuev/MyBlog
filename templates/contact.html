@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{{ super() }}
+<h1>{{title}}</h1>
+<br>
+{% if current_user.is_authenticated %}
+    {% for cat, msg in get_flashed_messages(True) %}
+    <div class="flash {{cat}}">{{msg}}</div>
+    {% endfor %}
+    <form action="" method="post", class="form-comment">
+    {{ form.hidden_tag() }}
+
+    {% for field in form if field.name not in ['csrf_token' ] %}
+
+        {% if field.errors %}
+        {{ field(class='invalid') }}
+        <span class="invalid-feedback">
+            {% for e in field.errors %}
+            {{ e }}
+            {% endfor %}
+        </span>
+        {% else %}
+        {{ field() }}
+        {% endif %}
+        {% endfor %}
+
+    </form>
+{% endif %}
+{% endblock %}

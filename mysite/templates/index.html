@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{{ super() }}
+<div class="article">
+<h1> Резюме</h1>
+{{text | safe}}
+</div>
+
+{% endblock %}

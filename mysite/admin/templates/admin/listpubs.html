@@ -1,0 +1,40 @@
+{% extends 'admin/base_admin.html' %}
+
+{% block content %}
+{{ super() }}
+<h3>Резюме</h3>
+<ul class="list-posts">
+    <li>
+    <div class="title">Текст резюме
+        <div style="float: right">
+        <form action="">
+        <button type="submit" formaction="{{url_for('admin.update_resume')}}">Редактировать </button>
+        </form>
+        </div>
+
+    </div>
+    <div class="annonce">{{resume.text[:50] | striptags}}</div>
+    </li>
+<h3>{{title}}</h3>
+<ul class="list-posts">
+{% for p in list %}
+
+<li>
+    <div class="title">{{p.title}}
+
+    <div style="float: right">
+        <form action="/delete_post" method="POST">
+        <button type="submit" formaction="{{url_for('admin.delete_post', alias=p.url)}}">Удалить статью</button>
+        </form>
+    </div>
+    <div style="float: right">
+        <form action="{{url_for('admin.update_post', alias=p.url)}}">
+        <button type="submit">Редактировать статью</button>
+        </form>
+    </div>
+    </div>
+    <div class="annonce">{{p.text[:50] | striptags}}</div>
+</li>
+{% endfor %}
+</ul>
+{% endblock %}

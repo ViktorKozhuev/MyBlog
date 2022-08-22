@@ -1,0 +1,43 @@
+{% extends 'admin/base_admin.html' %}
+
+{% block content %}
+{{ super() }}
+<h3>{{title}}</h3>
+<p>Загрузить новый файл</p>
+    <form action="{{ url_for('admin.upload', alias=alias) }}" method="post" enctype="multipart/form-data">
+      <input type="file" name="file">
+      <input type="submit" name="Загрузить">
+    </form>
+<br>
+<br>
+{% for cat, msg in get_flashed_messages(True) %}
+<div class="flash {{cat}}">{{msg}}</div>
+{% endfor %}
+<form action="{{url_for('admin.update_post', alias=alias)}}" method="post" class="form-contact">
+    <p><label>Название статьи:</label><input type="text", name="name", value="{{title_prev}}", required/>
+    <p><label>Текст статьи</label>
+    <p><textarea name="post" rows=30, cols=40>{{text_prev}}</textarea>
+    <p><input type="submit" value="Редактировать статью" />
+</form>
+
+<ul class="list-posts">
+{% for c in comments %}
+<li>
+    <div class="title">
+        {{c.name}}
+        <span>{{c.text}}</span>
+
+        <div style="float: right">
+        <form action="" method="POST">
+        <button type="submit" formaction="{{url_for('admin.delete_comment', alias=c.id)}}">Удалить </button>
+        </form>
+    </div>
+    </div>
+
+</li>
+{% endfor %}
+</ul>
+
+
+
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends 'admin/base_admin.html' %}
+
+{% block content %}
+{{ super() }}
+<h3>{{title}}</h3>
+<br>
+{% for cat, msg in get_flashed_messages(True) %}
+<div class="flash {{cat}}">{{msg}}</div>
+{% endfor %}
+<form action="{{url_for('admin.update_resume')}}" method="post" class="form-contact">
+    <p><label>Резюме</label>
+    <p><textarea name="text" rows=30, cols=40>{{text_prev}}</textarea>
+    <p><input type="submit" value="Редактировать резюме" />
+</form>
+{% endblock %}
